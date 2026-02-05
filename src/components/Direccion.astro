@@ -1,0 +1,359 @@
+---
+// UbicacionEvento.astro
+---
+
+<section class="py-8 md:py-16 relative overflow-hidden">
+  <div class="w-full px-4 md:px-8 flex justify-center">
+    <!-- CARD CON ADORNOS DORADOS Y EFECTO BLUR -->
+    <div class="relative max-w-md w-full" id="card-ubicacion-container">
+      <!-- CARD PRINCIPAL CON GLASSMORPHISM -->
+      <div
+        class="relative backdrop-blur-lg bg-[#0d2e56]/30 border border-[#c9a24d]/20 rounded-lg p-8 md:p-10 shadow-2xl overflow-hidden"
+        id="card-ubicacion"
+        style="backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);"
+      >
+        <!-- ADORNOS DORADOS - ESQUINAS -->
+        <div class="absolute top-0 left-0 w-20 h-20 pointer-events-none">
+          <div
+            class="absolute top-3 left-3 w-12 h-0.5 bg-gradient-to-r from-[#c9a24d] to-transparent"
+          >
+          </div>
+          <div
+            class="absolute top-3 left-3 w-0.5 h-12 bg-gradient-to-b from-[#c9a24d] to-transparent"
+          >
+          </div>
+          <div
+            class="absolute top-2 left-2 w-2 h-2 rounded-full bg-[#c9a24d] opacity-60"
+          >
+          </div>
+        </div>
+
+        <div class="absolute top-0 right-0 w-20 h-20 pointer-events-none">
+          <div
+            class="absolute top-3 right-3 w-12 h-0.5 bg-gradient-to-l from-[#c9a24d] to-transparent"
+          >
+          </div>
+          <div
+            class="absolute top-3 right-3 w-0.5 h-12 bg-gradient-to-b from-[#c9a24d] to-transparent"
+          >
+          </div>
+          <div
+            class="absolute top-2 right-2 w-2 h-2 rounded-full bg-[#c9a24d] opacity-60"
+          >
+          </div>
+        </div>
+
+        <div class="absolute bottom-0 left-0 w-20 h-20 pointer-events-none">
+          <div
+            class="absolute bottom-3 left-3 w-12 h-0.5 bg-gradient-to-r from-[#c9a24d] to-transparent"
+          >
+          </div>
+          <div
+            class="absolute bottom-3 left-3 w-0.5 h-12 bg-gradient-to-t from-[#c9a24d] to-transparent"
+          >
+          </div>
+          <div
+            class="absolute bottom-2 left-2 w-2 h-2 rounded-full bg-[#c9a24d] opacity-60"
+          >
+          </div>
+        </div>
+
+        <div class="absolute bottom-0 right-0 w-20 h-20 pointer-events-none">
+          <div
+            class="absolute bottom-3 right-3 w-12 h-0.5 bg-gradient-to-l from-[#c9a24d] to-transparent"
+          >
+          </div>
+          <div
+            class="absolute bottom-3 right-3 w-0.5 h-12 bg-gradient-to-t from-[#c9a24d] to-transparent"
+          >
+          </div>
+          <div
+            class="absolute bottom-2 right-2 w-2 h-2 rounded-full bg-[#c9a24d] opacity-60"
+          >
+          </div>
+        </div>
+
+        <!-- LÍNEA DECORATIVA HORIZONTAL SUPERIOR -->
+        <div
+          class="absolute top-12 left-1/2 transform -translate-x-1/2 w-3/4 h-px bg-gradient-to-r from-transparent via-[#c9a24d] to-transparent opacity-40"
+        >
+        </div>
+
+        <!-- CONTENIDO DEL CARD -->
+        <div class="relative z-10 text-center space-y-6">
+          <!-- IMAGEN DEL CASTILLO SIN CÍRCULO -->
+          <div class="flex justify-center mb-4" id="icono-ubicacion">
+            <img
+              src="/imagenes/castillo.png"
+              alt="Castillo"
+              class="w-20 h-20 md:w-24 md:h-24 object-contain"
+            />
+          </div>
+
+          <!-- TÍTULO -->
+          <div id="titulo-ubicacion">
+            <h3
+              class="font-charm text-2xl md:text-3xl text-white uppercase tracking-wider mb-2"
+            >
+              Recepción Social
+            </h3>
+            <div class="w-24 h-0.5 bg-[#c9a24d] mx-auto"></div>
+          </div>
+
+          <!-- LÍNEA DECORATIVA INTERMEDIA -->
+          <div
+            class="w-full h-px bg-gradient-to-r from-transparent via-[#c9a24d] to-transparent opacity-30 my-4"
+          >
+          </div>
+
+          <!-- DIRECCIÓN -->
+          <div id="direccion-evento" class="space-y-2">
+            <p
+              class="font-charm text-lg md:text-xl text-[#c9a24d] uppercase tracking-wide"
+            >
+              Salón de Eventos
+            </p>
+            <p
+              class="font-charm text-lg md:text-lg text-white leading-relaxed px-4"
+            >
+              Av. Fuerza aérea esq.<br />Todos santos
+            </p>
+          </div>
+
+          <!-- HORA -->
+          <div id="hora-evento" class="space-y-2">
+            <p
+              class="font-charm text-lg md:text-xl text-[#c9a24d] uppercase tracking-wide"
+            >
+              Hora
+            </p>
+            <p class="font-charm text-lg md:text-4xl text-white font-bold">
+              17:00 pm
+            </p>
+          </div>
+
+          <!-- LÍNEA DECORATIVA INTERMEDIA -->
+          <div
+            class="w-full h-px bg-gradient-to-r from-transparent via-[#c9a24d] to-transparent opacity-30 my-4"
+          >
+          </div>
+
+          <!-- BOTÓN VER UBICACIÓN -->
+          <div id="boton-ubicacion" class="pt-4">
+            <a
+              href="https://maps.app.goo.gl/iqei2S17acn8fKGJ9"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-block px-8
+            py-3 bg-gradient-to-r from-[#c9a24d] to-[#d4b366] text-white
+            font-charm text-lg md:text-xl uppercase tracking-wider rounded-full
+            shadow-lg hover:shadow-2xl transition-all duration-300
+            hover:scale-105 hover:from-[#d4b366] hover:to-[#c9a24d]
+            backdrop-blur-sm"
+            >
+              <span class="flex items-center gap-2 justify-center">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="w-5 h-5"
+                  fill="currentColor"
+                  viewBox="0 0 384 512"
+                >
+                  <path
+                    d="M215.7 499.2C267 435 384 279.4 384 192C384 86 298 0 192 0S0 86 0 192c0 87.4 117 243 168.3 307.2c12.3 15.3 35.1 15.3 47.4 0zM192 128a64 64 0 1 1 0 128 64 64 0 1 1 0-128z"
+                  ></path>
+                </svg>
+                Ver Ubicación
+              </span>
+            </a>
+          </div>
+        </div>
+
+        <!-- BRILLO SUTIL DE FONDO CON TRANSPARENCIA -->
+        <div
+          class="absolute inset-0 bg-gradient-to-br from-[#c9a24d]/10 via-transparent to-transparent pointer-events-none"
+        >
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    import { gsap } from "gsap";
+    import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+    gsap.registerPlugin(ScrollTrigger);
+
+    if (typeof window !== "undefined") {
+      document.addEventListener("DOMContentLoaded", () => {
+        console.log("📍 Iniciando animaciones de ubicación...");
+
+        // ESTADO INICIAL - Todo oculto
+        gsap.set("#card-ubicacion", { opacity: 0, scale: 0.9, y: 40 });
+        gsap.set("#icono-ubicacion", { opacity: 0, scale: 0.8, rotation: -10 });
+        gsap.set("#titulo-ubicacion", { opacity: 0, y: 20 });
+        gsap.set("#hora-evento", { opacity: 0, x: -30 });
+        gsap.set("#direccion-evento", { opacity: 0, x: 30 });
+        gsap.set("#boton-ubicacion", { opacity: 0, y: 20 });
+
+        // ANIMACIÓN AL HACER SCROLL
+        ScrollTrigger.create({
+          trigger: "#card-ubicacion-container",
+          start: "top 85%",
+          end: "top 20%",
+
+          onEnter: () => {
+            const tl = gsap.timeline();
+
+            // Card aparece
+            tl.to("#card-ubicacion", {
+              opacity: 1,
+              scale: 1,
+              y: 0,
+              duration: 0.8,
+              ease: "power3.out",
+            })
+              // Ícono aparece con rotación
+              .to(
+                "#icono-ubicacion",
+                {
+                  opacity: 1,
+                  scale: 1,
+                  rotation: 0,
+                  duration: 0.6,
+                  ease: "back.out(1.7)",
+                },
+                "-=0.4",
+              )
+              // Título
+              .to(
+                "#titulo-ubicacion",
+                {
+                  opacity: 1,
+                  y: 0,
+                  duration: 0.5,
+                  ease: "power2.out",
+                },
+                "-=0.3",
+              )
+              // Hora y Dirección desde los lados
+              .to(
+                "#hora-evento",
+                {
+                  opacity: 1,
+                  x: 0,
+                  duration: 0.5,
+                  ease: "power2.out",
+                },
+                "-=0.2",
+              )
+              .to(
+                "#direccion-evento",
+                {
+                  opacity: 1,
+                  x: 0,
+                  duration: 0.5,
+                  ease: "power2.out",
+                },
+                "-=0.4",
+              )
+              // Botón final
+              .to(
+                "#boton-ubicacion",
+                {
+                  opacity: 1,
+                  y: 0,
+                  duration: 0.5,
+                  ease: "back.out(1.2)",
+                },
+                "-=0.2",
+              );
+
+            // EFECTO DE FLOTACIÓN EN EL ÍCONO
+            gsap.to("#icono-ubicacion", {
+              y: -10,
+              duration: 2,
+              ease: "sine.inOut",
+              yoyo: true,
+              repeat: -1,
+              delay: 0.5,
+            });
+
+            // BRILLO EN EL BOTÓN
+            gsap.to("#boton-ubicacion a", {
+              boxShadow:
+                "0 0 20px rgba(201, 162, 77, 0.6), 0 0 40px rgba(201, 162, 77, 0.4)",
+              duration: 1.5,
+              ease: "sine.inOut",
+              yoyo: true,
+              repeat: -1,
+            });
+          },
+
+          onLeaveBack: () => {
+            // Resetear todo al salir
+            gsap.killTweensOf("#icono-ubicacion, #boton-ubicacion a");
+
+            const tl = gsap.timeline();
+
+            tl.to(
+              "#boton-ubicacion, #direccion-evento, #hora-evento, #titulo-ubicacion, #icono-ubicacion",
+              {
+                opacity: 0,
+                duration: 0.3,
+                ease: "power2.in",
+              },
+            ).to(
+              "#card-ubicacion",
+              {
+                opacity: 0,
+                scale: 0.9,
+                y: 40,
+                duration: 0.4,
+                ease: "power2.in",
+              },
+              "-=0.2",
+            );
+          },
+        });
+
+        console.log("📍✨ Animaciones de ubicación listas!");
+      });
+    }
+  </script>
+
+  <style>
+    /* Asegurar que el botón tenga transición suave */
+    #boton-ubicacion a {
+      position: relative;
+      overflow: hidden;
+    }
+
+    #boton-ubicacion a::before {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.2);
+      transform: translate(-50%, -50%);
+      transition:
+        width 0.6s,
+        height 0.6s;
+    }
+
+    #boton-ubicacion a:hover::before {
+      width: 300px;
+      height: 300px;
+    }
+
+    /* Efecto glassmorphism mejorado */
+    #card-ubicacion {
+      background: rgba(13, 46, 86, 0.3);
+      box-shadow:
+        0 8px 32px 0 rgba(0, 0, 0, 0.37),
+        inset 0 1px 1px 0 rgba(255, 255, 255, 0.1);
+    }
+  </style>
+</section>

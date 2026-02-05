@@ -1,0 +1,150 @@
+---
+// NombreQuinceañera.astro - Animaciones simultáneas y rápidas
+---
+
+<section
+  class="w-full pt-8 bg-gradient-to-b flex items-center justify-center p-4"
+>
+  <div class="max-w-lg w-full flex flex-col items-center justify-center">
+    <!-- Imagen marco.png -->
+    <div class="w-full flex justify-center mb-8 marco-animation">
+      <img
+        src="/imagenes/silueta.png"
+        alt="Marco de 15 años"
+        class="w-36 h-auto mx-auto"
+      />
+    </div>
+
+    <!-- Texto "Camila" -->
+    <div class="w-full flex justify-center mb-4 nombre-animation">
+      <h1
+        class="text-6xl sm:text-7xl md:text-8xl text-[#c9a24d] text-center font-great-vibes leading-tight"
+      >
+        Camila
+      </h1>
+    </div>
+
+    <!-- Texto "Te espero..." -->
+    <div class="w-full flex justify-center mb-8 te-espero-animation">
+      <p
+        class="text-2xl sm:text-3xl md:text-4xl text-white text-center font-crimson italic"
+      >
+        Te espero...
+      </p>
+    </div>
+
+    <!-- Separador dorado -->
+    <div class="w-full flex justify-center separador-animation">
+      <img
+        src="/imagenes/separador.png"
+        alt="Separador"
+        class="w-56 max-w-xs h-auto mx-auto"
+      />
+    </div>
+  </div>
+</section>
+
+<script>
+  import { gsap } from "gsap";
+
+  // Esperar a que el DOM esté listo
+  document.addEventListener("DOMContentLoaded", () => {
+    // Timeline con animaciones simultáneas SIN opacidad inicial
+    const tl = gsap.timeline({
+      defaults: {
+        ease: "power2.out",
+        duration: 0.6,
+      },
+    });
+
+    // TODAS las animaciones inician al mismo tiempo
+    // Marco con escala suave (SIN opacity 0)
+    tl.from(
+      ".marco-animation",
+      {
+        scale: 0.9,
+        duration: 0.6,
+      },
+      0,
+    );
+
+    // Resplandor dorado del marco
+    tl.to(
+      ".marco-animation",
+      {
+        filter: "drop-shadow(0 0 20px rgba(201, 162, 77, 0.6))",
+        duration: 0.4,
+      },
+      0.2,
+    );
+
+    // Nombre desde arriba (SIN opacity 0)
+    tl.from(
+      ".nombre-animation",
+      {
+        y: -20,
+        duration: 0.6,
+      },
+      0,
+    );
+
+    // Brillo en el nombre
+    tl.to(
+      ".nombre-animation h1",
+      {
+        textShadow: "0 0 30px rgba(201, 162, 77, 0.8)",
+        duration: 0.4,
+      },
+      0.2,
+    );
+
+    // "Te espero..." desde abajo (SIN opacity 0)
+    tl.from(
+      ".te-espero-animation",
+      {
+        y: 15,
+        duration: 0.6,
+      },
+      0,
+    );
+
+    // Brillo en "Te espero..."
+    tl.to(
+      ".te-espero-animation p",
+      {
+        textShadow: "0 0 15px rgba(255, 255, 255, 0.5)",
+        duration: 0.4,
+      },
+      0.2,
+    );
+
+    // Separador con escala horizontal (SIN opacity 0)
+    tl.from(
+      ".separador-animation",
+      {
+        scaleX: 0.5,
+        duration: 0.6,
+      },
+      0,
+    );
+
+    // ANIMACIÓN CONTINUA DE BRILLO EN EL NOMBRE
+    gsap.to(".nombre-animation h1", {
+      textShadow:
+        "0 0 40px rgba(201, 162, 77, 1), 0 0 20px rgba(201, 162, 77, 0.8)",
+      duration: 2,
+      ease: "sine.inOut",
+      yoyo: true,
+      repeat: -1,
+    });
+
+    // ANIMACIÓN CONTINUA DE FLOTACIÓN SUTIL EN "Te espero..."
+    gsap.to(".te-espero-animation", {
+      y: -5,
+      duration: 2.5,
+      ease: "sine.inOut",
+      yoyo: true,
+      repeat: -1,
+    });
+  });
+</script>

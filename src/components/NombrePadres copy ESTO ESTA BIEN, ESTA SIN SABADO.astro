@@ -1,0 +1,274 @@
+---
+// InvitacionPadres.astro
+---
+
+<section class="py-8 md:py-12 relative">
+  <div class="max-w-md mx-auto px-6 md:px-8">
+    <!-- TARJETA DE INVITACIÓN MÁS TRANSPARENTE -->
+    <div class="relative" id="tarjeta-container">
+      <!-- Card con blur muy transparente -->
+      <div
+        class="relative bg-blue-950/10 backdrop-blur-sm border border-[#c9a24d]/25 rounded-[2.5rem] px-8 py-10 sm:px-10 sm:py-12 shadow-2xl overflow-hidden"
+      >
+        <!-- Efecto de brillo interno muy sutil -->
+        <div
+          class="absolute inset-0 bg-gradient-to-br from-blue-900/5 via-transparent to-blue-950/5 pointer-events-none"
+        >
+        </div>
+
+        <!-- Contenido de la tarjeta -->
+        <div class="relative z-10 text-center space-y-5">
+          <!-- Título dorado -->
+          <div id="titulo-padres">
+            <h2
+              class="font-charm text-lg sm:text-xl font-crimson text-[#ffffff] tracking-wider"
+            >
+              En una noche donde la magia florece y el amor transforma, Mi
+              familia y yo les invitamos a ser parte de una celebración especial
+              para mi
+            </h2>
+          </div>
+
+          <!-- Nombres de los padres -->
+          <!-- <div id="nombres-padres" class="space-y-1">
+            <p
+              class="text-sm sm:text-base text-white font-crimson uppercase tracking-wide"
+            >
+              Juan Julio Justiniano
+            </p>
+            <p
+              class="text-sm sm:text-base text-white font-crimson uppercase tracking-wide"
+            >
+              Linzi Dirodríez
+            </p>
+          </div> -->
+
+          <!-- Texto "Celebremos Juntos" -->
+          <div id="celebremos-texto" class="pt-3">
+            <p
+              class="text-lg sm:text-xl font-crimson text-[#c9a24d] tracking-wider uppercase"
+            >
+              Celebremos Juntos
+            </p>
+          </div>
+
+          <!-- Fecha - 09 y ENERO a la misma altura -->
+          <div id="fecha-container" class="pt-4">
+            <!-- 09 ENERO alineados en baseline -->
+            <div class="flex items-center justify-center gap-3">
+              <p
+                class="text-7xl sm:text-8xl font-bold text-[#c9a24d] leading-none"
+                style="font-family: 'Crimson Text', serif;"
+              >
+                21
+              </p>
+              <div class="flex flex-col items-start justify-center">
+                <p
+                  class="text-2xl sm:text-3xl text-white font-crimson uppercase tracking-wide leading-none"
+                >
+                  Febrero
+                </p>
+                <p
+                  class="text-xl sm:text-sm text-white/70 font-crimson tracking-wide mt-1"
+                >
+                  del 2026
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Borde decorativo muy sutil en las esquinas -->
+        <div
+          class="absolute top-0 left-0 w-16 h-16 border-t border-l border-[#c9a24d]/10 rounded-tl-[2.5rem]"
+        >
+        </div>
+        <div
+          class="absolute top-0 right-0 w-16 h-16 border-t border-r border-[#c9a24d]/10 rounded-tr-[2.5rem]"
+        >
+        </div>
+        <div
+          class="absolute bottom-0 left-0 w-16 h-16 border-b border-l border-[#c9a24d]/10 rounded-bl-[2.5rem]"
+        >
+        </div>
+        <div
+          class="absolute bottom-0 right-0 w-16 h-16 border-b border-r border-[#c9a24d]/10 rounded-br-[2.5rem]"
+        >
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  if (typeof window !== "undefined") {
+    document.addEventListener("DOMContentLoaded", () => {
+      console.log("💳 Iniciando animación de tarjeta de invitación...");
+
+      // Estado inicial - todos los elementos invisibles
+      gsap.set("#tarjeta-container", { opacity: 0, scale: 0.9, y: 30 });
+      gsap.set("#titulo-padres", { opacity: 0, y: 20 });
+      gsap.set("#nombres-padres", { opacity: 0, y: 20 });
+      gsap.set("#celebremos-texto", { opacity: 0, y: 20 });
+      gsap.set("#fecha-container", { opacity: 0, scale: 0.8 });
+
+      // ScrollTrigger
+      ScrollTrigger.create({
+        trigger: "#tarjeta-container",
+        start: "top 85%",
+        end: "top 20%",
+
+        onEnter: () => {
+          console.log("💳 Tarjeta apareciendo...");
+          animarEntrada();
+        },
+
+        onLeaveBack: () => {
+          console.log("💳 Tarjeta desapareciendo...");
+          animarSalida();
+        },
+      });
+
+      // ANIMACIÓN DE ENTRADA ELEGANTE
+      function animarEntrada() {
+        const tl = gsap.timeline();
+
+        // 1. Contenedor de la tarjeta aparece
+        tl.to("#tarjeta-container", {
+          opacity: 1,
+          scale: 1,
+          y: 0,
+          duration: 0.8,
+          ease: "power3.out",
+        })
+          // 2. Título "JUNTO A MIS PADRES"
+          .to(
+            "#titulo-padres",
+            {
+              opacity: 1,
+              y: 0,
+              duration: 0.6,
+              ease: "power2.out",
+            },
+            "-=0.4",
+          )
+          // 3. Nombres de los padres
+          .to(
+            "#nombres-padres",
+            {
+              opacity: 1,
+              y: 0,
+              duration: 0.6,
+              ease: "power2.out",
+            },
+            "-=0.3",
+          )
+          // 4. Texto "CELEBREMOS JUNTOS"
+          .to(
+            "#celebremos-texto",
+            {
+              opacity: 1,
+              y: 0,
+              duration: 0.6,
+              ease: "power2.out",
+            },
+            "-=0.3",
+          )
+          // 5. Fecha (con efecto de escala)
+          .to(
+            "#fecha-container",
+            {
+              opacity: 1,
+              scale: 1,
+              duration: 0.8,
+              ease: "back.out(1.3)",
+            },
+            "-=0.4",
+          );
+      }
+
+      // ANIMACIÓN DE SALIDA
+      function animarSalida() {
+        const tl = gsap.timeline();
+
+        tl.to("#fecha-container", {
+          opacity: 0,
+          scale: 0.8,
+          duration: 0.4,
+          ease: "power2.in",
+        })
+          .to(
+            "#celebremos-texto",
+            {
+              opacity: 0,
+              y: 20,
+              duration: 0.4,
+              ease: "power2.in",
+            },
+            "-=0.3",
+          )
+          .to(
+            "#nombres-padres",
+            {
+              opacity: 0,
+              y: 20,
+              duration: 0.4,
+              ease: "power2.in",
+            },
+            "-=0.3",
+          )
+          .to(
+            "#titulo-padres",
+            {
+              opacity: 0,
+              y: 20,
+              duration: 0.4,
+              ease: "power2.in",
+            },
+            "-=0.3",
+          )
+          .to(
+            "#tarjeta-container",
+            {
+              opacity: 0,
+              scale: 0.9,
+              y: 30,
+              duration: 0.5,
+              ease: "power2.in",
+            },
+            "-=0.3",
+          );
+      }
+
+      console.log("💳✨ ¡Componente de tarjeta activado!");
+    });
+  }
+</script>
+
+<style>
+  /* Blur muy ligero y transparente */
+  #tarjeta-container > div {
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+
+  /* Efecto de brillo en la tarjeta al pasar el mouse */
+  #tarjeta-container > div:hover {
+    box-shadow:
+      0 0 20px rgba(201, 162, 77, 0.1),
+      0 6px 30px rgba(0, 0, 0, 0.2);
+    transition: box-shadow 0.3s ease;
+  }
+
+  /* Asegurar que el texto no se desborde */
+  @media (max-width: 640px) {
+    #tarjeta-container {
+      padding: 1rem;
+    }
+  }
+</style>

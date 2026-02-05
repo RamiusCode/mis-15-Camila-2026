@@ -1,0 +1,329 @@
+---
+// Contador.astro
+---
+
+<section class="py-4 md:py-12 relative">
+  <div class="max-w-lg mx-auto px-6 md:px-8">
+    <div class="w-full flex justify-center mb-2 silueta-animation">
+      <img
+        src="/imagenes/reloj.png"
+        alt="Silueta"
+        class="w-20 h-auto mx-auto"
+      />
+    </div>
+    <!-- TARJETA DE CONTADOR -->
+    <div class="relative" id="contador-container">
+      <!-- Card con blur transparente -->
+      <div
+        class="relative bg-blue-950/10 backdrop-blur-sm border border-[#c9a24d]/25 rounded-[2.5rem] px-8 py-8 sm:px-10 sm:py-10 shadow-2xl overflow-hidden"
+      >
+        <!-- Efecto de brillo interno muy sutil -->
+        <div
+          class="absolute inset-0 bg-gradient-to-br from-blue-900/5 via-transparent to-blue-950/5 pointer-events-none"
+        >
+        </div>
+
+        <!-- Contenido del contador -->
+        <div class="relative z-10 text-center space-y-6">
+          <!-- Título "FALTAN" -->
+          <div id="titulo-faltan">
+            <h2
+              class="text-xl sm:text-2xl font-crimson text-white tracking-widest uppercase"
+            >
+              Faltan
+            </h2>
+          </div>
+
+          <!-- Contador de tiempo -->
+          <div
+            id="contador-tiempo"
+            class="flex items-center justify-center gap-4 sm:gap-6"
+          >
+            <!-- DÍAS -->
+            <div class="flex flex-col items-center">
+              <p
+                id="dias"
+                class="text-4xl sm:text-5xl font-bold text-white leading-none"
+              >
+                00
+              </p>
+              <p
+                class="text-xs sm:text-sm text-white/70 font-crimson uppercase mt-1 tracking-wide"
+              >
+                Días
+              </p>
+            </div>
+
+            <!-- HRS -->
+            <div class="flex flex-col items-center">
+              <p
+                id="horas"
+                class="text-4xl sm:text-5xl font-bold text-white leading-none"
+              >
+                00
+              </p>
+              <p
+                class="text-xs sm:text-sm text-white/70 font-crimson uppercase mt-1 tracking-wide"
+              >
+                Hrs
+              </p>
+            </div>
+
+            <!-- MIN -->
+            <div class="flex flex-col items-center">
+              <p
+                id="minutos"
+                class="text-4xl sm:text-5xl font-bold text-white leading-none"
+              >
+                00
+              </p>
+              <p
+                class="text-xs sm:text-sm text-white/70 font-crimson uppercase mt-1 tracking-wide"
+              >
+                Min.
+              </p>
+            </div>
+
+            <!-- SEC -->
+            <div class="flex flex-col items-center">
+              <p
+                id="segundos"
+                class="text-4xl sm:text-5xl font-bold text-white leading-none"
+              >
+                00
+              </p>
+              <p
+                class="text-xs sm:text-sm text-white/70 font-crimson uppercase mt-1 tracking-wide"
+              >
+                Seg.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Borde decorativo muy sutil en las esquinas -->
+        <div
+          class="absolute top-0 left-0 w-16 h-16 border-t border-l border-[#c9a24d]/10 rounded-tl-[2.5rem]"
+        >
+        </div>
+        <div
+          class="absolute top-0 right-0 w-16 h-16 border-t border-r border-[#c9a24d]/10 rounded-tr-[2.5rem]"
+        >
+        </div>
+        <div
+          class="absolute bottom-0 left-0 w-16 h-16 border-b border-l border-[#c9a24d]/10 rounded-bl-[2.5rem]"
+        >
+        </div>
+        <div
+          class="absolute bottom-0 right-0 w-16 h-16 border-b border-r border-[#c9a24d]/10 rounded-br-[2.5rem]"
+        >
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  let intervaloContador: number | null = null;
+
+  if (typeof window !== "undefined") {
+    document.addEventListener("DOMContentLoaded", () => {
+      console.log("⏰ Iniciando contador regresivo...");
+
+      // Estado inicial - invisible
+      gsap.set("#contador-container", { opacity: 0, scale: 0.9, y: 30 });
+      gsap.set("#titulo-faltan", { opacity: 0, y: 20 });
+      gsap.set("#contador-tiempo", { opacity: 0, scale: 0.8 });
+
+      // ScrollTrigger
+      ScrollTrigger.create({
+        trigger: "#contador-container",
+        start: "top 85%",
+        end: "top 20%",
+
+        onEnter: () => {
+          console.log("⏰ Contador apareciendo...");
+          animarEntrada();
+          iniciarContador();
+        },
+
+        onLeaveBack: () => {
+          console.log("⏰ Contador desapareciendo...");
+          animarSalida();
+          detenerContador();
+        },
+      });
+
+      // ANIMACIÓN DE ENTRADA
+      function animarEntrada() {
+        const tl = gsap.timeline();
+
+        tl.to("#contador-container", {
+          opacity: 1,
+          scale: 1,
+          y: 0,
+          duration: 0.8,
+          ease: "power3.out",
+        })
+          .to(
+            "#titulo-faltan",
+            {
+              opacity: 1,
+              y: 0,
+              duration: 0.6,
+              ease: "power2.out",
+            },
+            "-=0.4",
+          )
+          .to(
+            "#contador-tiempo",
+            {
+              opacity: 1,
+              scale: 1,
+              duration: 0.8,
+              ease: "back.out(1.3)",
+            },
+            "-=0.4",
+          );
+      }
+
+      // ANIMACIÓN DE SALIDA
+      function animarSalida() {
+        const tl = gsap.timeline();
+
+        tl.to("#contador-tiempo", {
+          opacity: 0,
+          scale: 0.8,
+          duration: 0.4,
+          ease: "power2.in",
+        })
+          .to(
+            "#titulo-faltan",
+            {
+              opacity: 0,
+              y: 20,
+              duration: 0.4,
+              ease: "power2.in",
+            },
+            "-=0.3",
+          )
+          .to(
+            "#contador-container",
+            {
+              opacity: 0,
+              scale: 0.9,
+              y: 30,
+              duration: 0.5,
+              ease: "power2.in",
+            },
+            "-=0.3",
+          );
+      }
+
+      // FUNCIÓN PARA INICIAR EL CONTADOR
+      function iniciarContador() {
+        actualizarContador();
+        intervaloContador = window.setInterval(actualizarContador, 1000);
+      }
+
+      // FUNCIÓN PARA DETENER EL CONTADOR
+      function detenerContador() {
+        if (intervaloContador !== null) {
+          clearInterval(intervaloContador);
+          intervaloContador = null;
+        }
+      }
+
+      // FUNCIÓN PARA ACTUALIZAR EL CONTADOR
+      function actualizarContador() {
+        // Fecha objetivo: 21 de febrero de 2026 a las 00:00:00
+        const fechaObjetivo = new Date("2026-02-21T00:00:00").getTime();
+        const ahora = new Date().getTime();
+        const diferencia = fechaObjetivo - ahora;
+
+        if (diferencia > 0) {
+          // Calcular días, horas, minutos y segundos
+          const dias = Math.floor(diferencia / (1000 * 60 * 60 * 24));
+          const horas = Math.floor(
+            (diferencia % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60),
+          );
+          const minutos = Math.floor(
+            (diferencia % (1000 * 60 * 60)) / (1000 * 60),
+          );
+          const segundos = Math.floor((diferencia % (1000 * 60)) / 1000);
+
+          // Actualizar el DOM
+          const diasEl = document.getElementById("dias");
+          const horasEl = document.getElementById("horas");
+          const minutosEl = document.getElementById("minutos");
+          const segundosEl = document.getElementById("segundos");
+
+          if (diasEl) diasEl.textContent = dias.toString().padStart(2, "0");
+          if (horasEl) horasEl.textContent = horas.toString().padStart(2, "0");
+          if (minutosEl)
+            minutosEl.textContent = minutos.toString().padStart(2, "0");
+          if (segundosEl)
+            segundosEl.textContent = segundos.toString().padStart(2, "0");
+        } else {
+          // Si ya pasó la fecha, mostrar ceros
+          const diasEl = document.getElementById("dias");
+          const horasEl = document.getElementById("horas");
+          const minutosEl = document.getElementById("minutos");
+          const segundosEl = document.getElementById("segundos");
+
+          if (diasEl) diasEl.textContent = "00";
+          if (horasEl) horasEl.textContent = "00";
+          if (minutosEl) minutosEl.textContent = "00";
+          if (segundosEl) segundosEl.textContent = "00";
+
+          detenerContador();
+        }
+      }
+
+      console.log("⏰✨ ¡Componente de contador activado!");
+    });
+  }
+</script>
+
+<style>
+  /* Blur muy ligero y transparente */
+  #contador-container > div {
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+
+  /* Efecto de brillo en la tarjeta al pasar el mouse */
+  #contador-container > div:hover {
+    box-shadow:
+      0 0 20px rgba(201, 162, 77, 0.1),
+      0 6px 30px rgba(0, 0, 0, 0.2);
+    transition: box-shadow 0.3s ease;
+  }
+
+  /* Asegurar que el texto no se desborde */
+  @media (max-width: 640px) {
+    #contador-container {
+      padding: 1rem;
+    }
+  }
+
+  /* Animación de parpadeo sutil en los segundos */
+  #segundos {
+    animation: pulse-subtle 1s ease-in-out infinite;
+  }
+
+  @keyframes pulse-subtle {
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.7;
+    }
+  }
+</style>

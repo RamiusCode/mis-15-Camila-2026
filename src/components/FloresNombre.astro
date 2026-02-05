@@ -1,0 +1,136 @@
+---
+// Componente de sección para quinceañera - Animaciones simultáneas y elegantes
+---
+
+<section
+    class="w-full pt-10 bg-gradient-to-b flex items-center justify-center p-4"
+>
+    <div class="max-w-lg w-full flex flex-col items-center justify-center">
+        <!-- Imagen marco.png -->
+        <div class="w-full flex justify-center mb-8 marco-animation">
+            <img
+                src="/imagenes/marcodorado.webp"
+                alt="Marco de 15 años"
+                class="w-48 h-auto mx-auto"
+            />
+        </div>
+
+        <!-- Imagen silueta.png -->
+        <div class="w-full flex justify-center mb-10 silueta-animation">
+            <img
+                src="/imagenes/silueta.png"
+                alt="Silueta"
+                class="w-48 h-auto mx-auto"
+            />
+        </div>
+
+        <!-- Texto "Camila" -->
+        <div class="w-full flex justify-center mb-0 nombre-animation">
+            <h1 class="text-7xl text-[#c9a24d] text-center font-great-vibes">
+                Camila
+            </h1>
+        </div>
+
+        <!-- Texto "Zurita Camacho" -->
+        <div class="w-full flex justify-center mb-8 apellido-animation">
+            <p class="text-[30px] text-white text-center font-crimson">
+                Zurita Camacho
+            </p>
+        </div>
+
+        <!-- Separador dorado -->
+        <div class="w-full flex justify-center separador-animation">
+            <img
+                src="/imagenes/separador.png"
+                alt="Separador"
+                class="w-56 max-w-xs h-auto mx-auto"
+            />
+        </div>
+    </div>
+</section>
+
+<script>
+    import { gsap } from "gsap";
+
+    // Esperar a que el DOM esté listo
+    document.addEventListener("DOMContentLoaded", () => {
+        // Timeline con animaciones suaves SIN opacidad inicial
+        const tl = gsap.timeline({
+            defaults: {
+                ease: "power2.out",
+                duration: 0.6, // Animación rápida
+            },
+        });
+
+        // TODAS las animaciones inician al mismo tiempo
+        // Marco con escala suave (SIN opacity 0)
+        tl.from(
+            ".marco-animation",
+            {
+                scale: 0.9,
+                duration: 0.6,
+            },
+            0,
+        );
+
+        // Resplandor dorado del marco
+        tl.to(
+            ".marco-animation",
+            {
+                filter: "drop-shadow(0 0 20px rgba(217, 182, 76, 0.6))",
+                duration: 0.4,
+            },
+            0.2,
+        );
+
+        // Silueta con escala suave (SIN opacity 0)
+        tl.from(
+            ".silueta-animation",
+            {
+                scale: 0.9,
+                duration: 0.6,
+            },
+            0,
+        );
+
+        // Nombre desde arriba (SIN opacity 0)
+        tl.from(
+            ".nombre-animation",
+            {
+                y: -20,
+                duration: 0.6,
+            },
+            0,
+        );
+
+        // Brillo en el nombre
+        tl.to(
+            ".nombre-animation h1",
+            {
+                textShadow: "0 0 30px rgba(217, 182, 76, 0.8)",
+                duration: 0.4,
+            },
+            0.2,
+        );
+
+        // Apellido desde abajo (SIN opacity 0)
+        tl.from(
+            ".apellido-animation",
+            {
+                y: 15,
+                duration: 0.6,
+            },
+            0,
+        );
+
+        // Separador con escala horizontal (SIN opacity 0)
+        tl.from(
+            ".separador-animation",
+            {
+                scaleX: 0.5,
+                duration: 0.6,
+            },
+            0,
+        );
+    });
+</script>

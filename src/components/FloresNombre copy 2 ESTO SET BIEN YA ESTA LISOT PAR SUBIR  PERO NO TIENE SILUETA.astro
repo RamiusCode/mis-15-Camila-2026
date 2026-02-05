@@ -1,0 +1,132 @@
+---
+// Componente de sección para quinceañera - Animaciones elegantes
+---
+
+<section
+    class="w-full pt-20 bg-gradient-to-b flex items-center justify-center p-4"
+>
+    <div class="max-w-lg w-full flex flex-col items-center justify-center">
+        <!-- Imagen marco.png -->
+        <div class="w-full flex justify-center mb-8 marco-animation">
+            <img
+                src="/imagenes/marcodorado.webp"
+                alt="Marco de 15 años"
+                class="w-64 h-auto mx-auto"
+            />
+        </div>
+
+        <!-- Texto "Camila" -->
+        <div class="w-full flex justify-center mb-0 nombre-animation">
+            <h1 class="text-7xl text-[#c9a24d] text-center font-great-vibes">
+                Camila
+            </h1>
+        </div>
+
+        <!-- Texto "Urita camacho" -->
+        <div class="w-full flex justify-center mb-8 apellido-animation">
+            <p class="text-[30px] text-white text-center font-crimson">
+                Urita Camacho
+            </p>
+        </div>
+
+        <!-- Separador dorado -->
+        <div class="w-full flex justify-center separador-animation">
+            <img
+                src="/imagenes/separador.png"
+                alt="Separador"
+                class="w-56 max-w-xs h-auto mx-auto"
+            />
+        </div>
+    </div>
+</section>
+
+<script>
+    import { gsap } from "gsap";
+
+    // Esperar a que el DOM esté listo
+    document.addEventListener("DOMContentLoaded", () => {
+        // Timeline elegante con secuencia suave
+        const tl = gsap.timeline({
+            defaults: {
+                ease: "power2.out",
+            },
+        });
+
+        // 1. Marco aparece con fade suave y rotación sutil
+        tl.from(".marco-animation", {
+            opacity: 0,
+            scale: 0.8,
+            rotation: -5,
+            duration: 1.5,
+            ease: "power3.out",
+        });
+
+        // 2. Resplandor dorado del marco
+        tl.to(
+            ".marco-animation",
+            {
+                filter: "drop-shadow(0 0 20px rgba(217, 182, 76, 0.6))",
+                duration: 0.8,
+                ease: "sine.inOut",
+            },
+            "-=0.5",
+        );
+
+        // 3. Nombre aparece con elegancia desde arriba
+        tl.from(
+            ".nombre-animation",
+            {
+                opacity: 0,
+                y: -40,
+                duration: 1.2,
+                ease: "power3.out",
+            },
+            "-=0.8",
+        );
+
+        // 4. Brillo sutil en el nombre
+        tl.to(
+            ".nombre-animation h1",
+            {
+                textShadow: "0 0 30px rgba(217, 182, 76, 0.8)",
+                duration: 0.6,
+                ease: "sine.inOut",
+            },
+            "-=0.4",
+        );
+
+        // 5. Apellido aparece suavemente
+        tl.from(
+            ".apellido-animation",
+            {
+                opacity: 0,
+                y: 20,
+                duration: 1,
+                ease: "power2.out",
+            },
+            "-=0.6",
+        );
+
+        // 6. Separador aparece con elegancia desde el centro
+        tl.from(
+            ".separador-animation",
+            {
+                opacity: 0,
+                scaleX: 0,
+                duration: 1,
+                ease: "power2.out",
+            },
+            "-=0.5",
+        );
+
+        // 7. Efecto final de brillo suave en todo
+        tl.to(
+            ".marco-animation, .nombre-animation, .apellido-animation, .separador-animation",
+            {
+                opacity: 1,
+                duration: 0.3,
+            },
+            "+=0.2",
+        );
+    });
+</script>

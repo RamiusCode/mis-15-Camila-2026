@@ -1,0 +1,184 @@
+---
+// Pergamino.astro - La Bella y la Bestia
+---
+
+<section class="py-8 md:py-16 relative overflow-hidden">
+  <div class="w-full px-4 md:px-8">
+    <!-- CONTENEDOR PRINCIPAL CON PERGAMINO -->
+    <div
+      class="relative flex items-center justify-center"
+      id="contenedor-pergamino-invitacion"
+    >
+      <!-- PERGAMINO CON TEXTO - BORDE A BORDE -->
+      <div
+        class="relative w-full max-w-6xl"
+        id="pergamino-invitacion-container"
+      >
+        <!-- IMAGEN DEL PERGAMINO - ANCHO COMPLETO -->
+        <div class="relative w-full">
+          <img
+            src="/imagenes/pergamino.png"
+            alt="Pergamino decorativo"
+            class="w-full h-auto object-cover"
+          />
+
+          <!-- TEXTO SOBRE EL PERGAMINO -->
+          <div
+            class="absolute inset-0 flex items-center justify-center px-12 sm:px-16 md:px-24 lg:px-32 xl:px-40"
+          >
+            <div class="w-full" id="texto-pergamino-invitacion">
+              <p
+                class="font-charm text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl text-[#2c1810] text-center leading-relaxed"
+              >
+                TE ESPERO EN MI FIESTA
+              </p>
+
+              <p
+                class="font-charm text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl text-[#4a3428] text-center leading-relaxed"
+              >
+                Esta cordialmente invitado
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    import { gsap } from "gsap";
+    import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+    gsap.registerPlugin(ScrollTrigger);
+
+    if (typeof window !== "undefined") {
+      document.addEventListener("DOMContentLoaded", () => {
+        console.log(
+          "📜 Iniciando animación de pergamino - La Bella y la Bestia...",
+        );
+
+        // Estado inicial - Pergamino
+        gsap.set("#pergamino-invitacion-container", {
+          opacity: 0,
+          scale: 0.85,
+          y: 40,
+        });
+        gsap.set("#texto-pergamino-invitacion", { opacity: 0, y: 30 });
+
+        // ScrollTrigger con entrada y salida
+        ScrollTrigger.create({
+          trigger: "#contenedor-pergamino-invitacion",
+          start: "top 85%",
+          end: "top 20%",
+
+          onEnter: () => {
+            console.log("📜 Pergamino apareciendo...");
+            animarEntrada();
+          },
+
+          onLeaveBack: () => {
+            console.log("📜 Pergamino desapareciendo...");
+            animarSalida();
+          },
+        });
+
+        // ANIMACIÓN DE ENTRADA ELEGANTE
+        function animarEntrada() {
+          const tl = gsap.timeline();
+
+          // Pergamino aparece con escala completa
+          tl.to("#pergamino-invitacion-container", {
+            opacity: 1,
+            scale: 1,
+            y: 0,
+            duration: 1.2,
+            ease: "power3.out",
+          })
+            // Texto aparece con delay
+            .to(
+              "#texto-pergamino-invitacion",
+              {
+                opacity: 1,
+                y: 0,
+                duration: 1,
+                ease: "power2.out",
+              },
+              "-=0.6",
+            );
+
+          // Efecto de brillo sutil en el texto
+          gsap.to("#texto-pergamino-invitacion p", {
+            textShadow: `
+            0 1px 2px rgba(255, 255, 255, 0.8),
+            0 2px 4px rgba(255, 255, 255, 0.6),
+            0 0 8px rgba(74, 111, 165, 0.3)
+          `,
+            duration: 1.5,
+            ease: "sine.inOut",
+            yoyo: true,
+            repeat: -1,
+          });
+        }
+
+        // ANIMACIÓN DE SALIDA
+        function animarSalida() {
+          // Detener animaciones continuas
+          gsap.killTweensOf("#texto-pergamino-invitacion p");
+
+          const tl = gsap.timeline();
+
+          tl.to("#texto-pergamino-invitacion", {
+            opacity: 0,
+            y: 30,
+            duration: 0.5,
+            ease: "power2.in",
+          }).to(
+            "#pergamino-invitacion-container",
+            {
+              opacity: 0,
+              scale: 0.85,
+              y: 40,
+              duration: 0.6,
+              ease: "power2.in",
+            },
+            "-=0.3",
+          );
+        }
+
+        console.log("📜✨ ¡Pergamino de La Bella y la Bestia activado!");
+      });
+    }
+  </script>
+
+  <style>
+    /* Asegurar que el pergamino ocupe todo el ancho disponible */
+    #pergamino-invitacion-container {
+      width: 100%;
+    }
+
+    /* Ajustes de padding del texto según el tamaño de pantalla */
+    @media (max-width: 640px) {
+      #texto-pergamino-invitacion {
+        padding: 0 2rem;
+      }
+    }
+
+    @media (min-width: 641px) and (max-width: 768px) {
+      #texto-pergamino-invitacion {
+        padding: 0 3rem;
+      }
+    }
+
+    @media (min-width: 769px) and (max-width: 1024px) {
+      #texto-pergamino-invitacion {
+        padding: 0 4rem;
+      }
+    }
+
+    @media (min-width: 1025px) {
+      #texto-pergamino-invitacion {
+        padding: 0 6rem;
+      }
+    }
+  </style>
+</section>

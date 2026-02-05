@@ -1,0 +1,257 @@
+---
+// DressCode.astro
+---
+
+<section class="py-8 md:py-16 relative overflow-hidden">
+  <div class="w-full px-4 md:px-8 flex justify-center">
+    <!-- CARD CON ADORNOS DORADOS Y EFECTO BLUR -->
+    <div class="relative max-w-md w-full" id="card-dresscode-container">
+      <!-- CARD PRINCIPAL CON GLASSMORPHISM -->
+      <div
+        class="relative backdrop-blur-lg bg-[#0d2e56]/30 border border-[#c9a24d]/20 rounded-lg p-8 md:p-10 shadow-2xl overflow-hidden"
+        id="card-dresscode"
+        style="backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);"
+      >
+        <!-- ADORNOS DORADOS - ESQUINAS -->
+        <div class="absolute top-0 left-0 w-20 h-20 pointer-events-none">
+          <div
+            class="absolute top-3 left-3 w-12 h-0.5 bg-gradient-to-r from-[#c9a24d] to-transparent"
+          >
+          </div>
+          <div
+            class="absolute top-3 left-3 w-0.5 h-12 bg-gradient-to-b from-[#c9a24d] to-transparent"
+          >
+          </div>
+          <div
+            class="absolute top-2 left-2 w-2 h-2 rounded-full bg-[#c9a24d] opacity-60"
+          >
+          </div>
+        </div>
+
+        <div class="absolute top-0 right-0 w-20 h-20 pointer-events-none">
+          <div
+            class="absolute top-3 right-3 w-12 h-0.5 bg-gradient-to-l from-[#c9a24d] to-transparent"
+          >
+          </div>
+          <div
+            class="absolute top-3 right-3 w-0.5 h-12 bg-gradient-to-b from-[#c9a24d] to-transparent"
+          >
+          </div>
+          <div
+            class="absolute top-2 right-2 w-2 h-2 rounded-full bg-[#c9a24d] opacity-60"
+          >
+          </div>
+        </div>
+
+        <div class="absolute bottom-0 left-0 w-20 h-20 pointer-events-none">
+          <div
+            class="absolute bottom-3 left-3 w-12 h-0.5 bg-gradient-to-r from-[#c9a24d] to-transparent"
+          >
+          </div>
+          <div
+            class="absolute bottom-3 left-3 w-0.5 h-12 bg-gradient-to-t from-[#c9a24d] to-transparent"
+          >
+          </div>
+          <div
+            class="absolute bottom-2 left-2 w-2 h-2 rounded-full bg-[#c9a24d] opacity-60"
+          >
+          </div>
+        </div>
+
+        <div class="absolute bottom-0 right-0 w-20 h-20 pointer-events-none">
+          <div
+            class="absolute bottom-3 right-3 w-12 h-0.5 bg-gradient-to-l from-[#c9a24d] to-transparent"
+          >
+          </div>
+          <div
+            class="absolute bottom-3 right-3 w-0.5 h-12 bg-gradient-to-t from-[#c9a24d] to-transparent"
+          >
+          </div>
+          <div
+            class="absolute bottom-2 right-2 w-2 h-2 rounded-full bg-[#c9a24d] opacity-60"
+          >
+          </div>
+        </div>
+
+        <!-- LÍNEA DECORATIVA HORIZONTAL SUPERIOR -->
+        <div
+          class="absolute top-12 left-1/2 transform -translate-x-1/2 w-3/4 h-px bg-gradient-to-r from-transparent via-[#c9a24d] to-transparent opacity-40"
+        >
+        </div>
+
+        <!-- CONTENIDO DEL CARD -->
+        <div class="relative z-10 text-center space-y-6">
+          <!-- IMAGEN DEL DRESS CODE -->
+          <div class="flex justify-center mb-4" id="imagen-dresscode">
+            <img
+              src="/imagenes/codigovestimenta.png"
+              alt="Dress Code"
+              class="w-32 h-32 md:w-40 md:h-40 object-contain"
+            />
+          </div>
+
+          <!-- TÍTULO -->
+          <div id="titulo-dresscode">
+            <h3
+              class="font-charm text-3xl md:text-4xl text-[#c9a24d] uppercase tracking-wider mb-2 font-bold"
+            >
+              Dress Code
+            </h3>
+            <div class="w-32 h-0.5 bg-[#c9a24d] mx-auto"></div>
+          </div>
+
+          <!-- LÍNEA DECORATIVA INTERMEDIA -->
+          <div
+            class="w-full h-px bg-gradient-to-r from-transparent via-[#c9a24d] to-transparent opacity-30 my-4"
+          >
+          </div>
+
+          <!-- TEXTO DESCRIPTIVO -->
+          <div id="texto-dresscode" class="space-y-2 px-4">
+            <p class="font-charm text-lg md:text-xl text-white leading-relaxed">
+              Se reserva color dorado<br />para la quinceañera
+            </p>
+          </div>
+        </div>
+
+        <!-- BRILLO SUTIL DE FONDO CON TRANSPARENCIA -->
+        <div
+          class="absolute inset-0 bg-gradient-to-br from-[#c9a24d]/10 via-transparent to-transparent pointer-events-none"
+        >
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    import { gsap } from "gsap";
+    import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+    gsap.registerPlugin(ScrollTrigger);
+
+    if (typeof window !== "undefined") {
+      document.addEventListener("DOMContentLoaded", () => {
+        console.log("👔 Iniciando animaciones de Dress Code...");
+
+        // ESTADO INICIAL - Todo oculto
+        gsap.set("#card-dresscode", { opacity: 0, scale: 0.9, y: 40 });
+        gsap.set("#imagen-dresscode", {
+          opacity: 0,
+          scale: 0.8,
+          rotation: -10,
+        });
+        gsap.set("#titulo-dresscode", { opacity: 0, y: 20 });
+        gsap.set("#texto-dresscode", { opacity: 0, y: 30 });
+
+        // ANIMACIÓN AL HACER SCROLL
+        ScrollTrigger.create({
+          trigger: "#card-dresscode-container",
+          start: "top 85%",
+          end: "top 20%",
+
+          onEnter: () => {
+            const tl = gsap.timeline();
+
+            // Card aparece
+            tl.to("#card-dresscode", {
+              opacity: 1,
+              scale: 1,
+              y: 0,
+              duration: 0.8,
+              ease: "power3.out",
+            })
+              // Imagen aparece con rotación
+              .to(
+                "#imagen-dresscode",
+                {
+                  opacity: 1,
+                  scale: 1,
+                  rotation: 0,
+                  duration: 0.6,
+                  ease: "back.out(1.7)",
+                },
+                "-=0.4",
+              )
+              // Título
+              .to(
+                "#titulo-dresscode",
+                {
+                  opacity: 1,
+                  y: 0,
+                  duration: 0.5,
+                  ease: "power2.out",
+                },
+                "-=0.3",
+              )
+              // Texto descriptivo
+              .to(
+                "#texto-dresscode",
+                {
+                  opacity: 1,
+                  y: 0,
+                  duration: 0.5,
+                  ease: "power2.out",
+                },
+                "-=0.2",
+              );
+
+            // EFECTO DE FLOTACIÓN EN LA IMAGEN
+            gsap.to("#imagen-dresscode", {
+              y: -10,
+              duration: 2.5,
+              ease: "sine.inOut",
+              yoyo: true,
+              repeat: -1,
+              delay: 0.5,
+            });
+
+            // BRILLO SUTIL EN EL TÍTULO
+            gsap.to("#titulo-dresscode h3", {
+              textShadow:
+                "0 0 10px rgba(201, 162, 77, 0.6), 0 0 20px rgba(201, 162, 77, 0.4)",
+              duration: 2,
+              ease: "sine.inOut",
+              yoyo: true,
+              repeat: -1,
+            });
+          },
+
+          onLeaveBack: () => {
+            // Resetear todo al salir
+            gsap.killTweensOf("#imagen-dresscode, #titulo-dresscode h3");
+
+            const tl = gsap.timeline();
+
+            tl.to("#texto-dresscode, #titulo-dresscode, #imagen-dresscode", {
+              opacity: 0,
+              duration: 0.3,
+              ease: "power2.in",
+            }).to(
+              "#card-dresscode",
+              {
+                opacity: 0,
+                scale: 0.9,
+                y: 40,
+                duration: 0.4,
+                ease: "power2.in",
+              },
+              "-=0.2",
+            );
+          },
+        });
+
+        console.log("👔✨ Animaciones de Dress Code listas!");
+      });
+    }
+  </script>
+
+  <style>
+    /* Efecto glassmorphism mejorado */
+    #card-dresscode {
+      background: rgba(13, 46, 86, 0.3);
+      box-shadow:
+        0 8px 32px 0 rgba(0, 0, 0, 0.37),
+        inset 0 1px 1px 0 rgba(255, 255, 255, 0.1);
+    }
+  </style>
+</section>

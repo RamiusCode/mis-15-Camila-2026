@@ -1,0 +1,74 @@
+---
+// Mensaje.astro
+---
+
+<section class="py-4 md:py-12 relative">
+    <div class="max-w-4xl mx-auto px-8 md:px-8">
+        <!-- CONTENEDOR DEL MENSAJE -->
+        <div class="text-center" id="mensaje-container">
+            <p
+                class="font-charm text-xl sm:text-2xl md:text-3xl lg:text-4xl text-white font-crimson leading-relaxed"
+                id="texto-mensaje"
+            >
+                En una noche donde la magia florece y el amor transforma, Mi
+                familia y yo les invitamos a ser parte de una celebración
+                especial para mi
+            </p>
+        </div>
+    </div>
+</section>
+
+<script>
+    import { gsap } from "gsap";
+    import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+    gsap.registerPlugin(ScrollTrigger);
+
+    if (typeof window !== "undefined") {
+        document.addEventListener("DOMContentLoaded", () => {
+            console.log("💌 Iniciando animación de mensaje...");
+
+            // Estado inicial - invisible
+            gsap.set("#texto-mensaje", { opacity: 0, y: 40 });
+
+            // ScrollTrigger
+            ScrollTrigger.create({
+                trigger: "#mensaje-container",
+                start: "top 85%",
+                end: "top 20%",
+
+                onEnter: () => {
+                    console.log("💌 Mensaje apareciendo...");
+                    animarEntrada();
+                },
+
+                onLeaveBack: () => {
+                    console.log("💌 Mensaje desapareciendo...");
+                    animarSalida();
+                },
+            });
+
+            // ANIMACIÓN DE ENTRADA ELEGANTE
+            function animarEntrada() {
+                gsap.to("#texto-mensaje", {
+                    opacity: 1,
+                    y: 0,
+                    duration: 1.2,
+                    ease: "power3.out",
+                });
+            }
+
+            // ANIMACIÓN DE SALIDA
+            function animarSalida() {
+                gsap.to("#texto-mensaje", {
+                    opacity: 0,
+                    y: 40,
+                    duration: 0.6,
+                    ease: "power2.in",
+                });
+            }
+
+            console.log("💌✨ ¡Componente mensaje activado!");
+        });
+    }
+</script>
